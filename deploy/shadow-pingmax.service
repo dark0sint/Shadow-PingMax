@@ -1,0 +1,18 @@
+[Unit]
+Description=Shadow PingMax
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/shadow-pingmax
+EnvironmentFile=/opt/shadow-pingmax/.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/opt/shadow-pingmax/data
+
+[Install]
+WantedBy=multi-user.target
