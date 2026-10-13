@@ -1,0 +1,9 @@
+{
+  "name": "Shadow PingMax",
+  "short_name": "PingMax",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12101a",
+  "theme_color": "#12101a",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

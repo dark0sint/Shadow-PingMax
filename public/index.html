@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12101a">
+  <meta name="color-scheme" content="dark">
+  <title>Shadow PingMax</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img src="/icon.svg" alt="" width="30" height="30"><span>Shadow PingMax</span></div>
+    <nav id="tabs" class="tabs" aria-label="Menu utama" hidden>
+      <button type="button" data-tab="ping" aria-current="page">Ping</button>
+      <button type="button" data-tab="history">Riwayat</button>
+    </nav>
+    <button id="logout" class="btn ghost" type="button" hidden>Keluar</button>
+  </header>
+
+  <main>
+    <!-- Login -->
+    <section id="view-login" class="narrow" hidden>
+      <form id="login-form" class="card" novalidate>
+        <h1>Masuk</h1>
+        <p class="muted">Masukkan password akses untuk memakai Shadow PingMax.</p>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <p id="login-error" class="error" role="alert" hidden></p>
+        <button class="btn primary block" type="submit">Masuk</button>
+      </form>
+    </section>
+
+    <!-- Ping -->
+    <section id="view-ping" hidden>
+      <div class="layout">
+        <form id="ping-form" class="card" novalidate>
+          <h1>Kirim ping</h1>
+
+          <label for="keyword">Kata kunci / judul</label>
+          <input id="keyword" type="text" maxlength="200" placeholder="mis. jasa desain interior Bandung" autocomplete="off" required>
+
+          <div class="row-between">
+            <label for="urls">URL</label>
+            <span id="url-count" class="muted small">0 URL</span>
+          </div>
+          <textarea id="urls" rows="6" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Satu URL per baris&#10;https://contoh.com/artikel-baru&#10;https://contoh.com/produk"></textarea>
+
+          <fieldset>
+            <legend>Kategori</legend>
+            <div id="cats" class="chips"></div>
+          </fieldset>
+
+          <details class="opt">
+            <summary>IndexNow untuk Bing, Yandex, Naver, Seznam (opsional)</summary>
+            <label for="indexnow">IndexNow key</label>
+            <input id="indexnow" type="text" autocomplete="off" spellcheck="false" placeholder="key yang file-nya ada di domain Anda">
+            <p class="muted small">File <code>https://domain-anda/&lt;key&gt;.txt</code> harus berisi key yang sama, kalau tidak server akan menolak.</p>
+          </details>
+
+          <p id="form-error" class="error" role="alert" hidden></p>
+          <button id="submit" class="btn primary block" type="submit">Kirim ping</button>
+        </form>
+
+        <section class="card live" aria-live="polite">
+          <div id="live-empty" class="empty">
+            <h2>Belum ada ping</h2>
+            <p class="muted">Isi kata kunci dan URL, pilih kategori, lalu tekan Kirim ping. Hasil tiap server tampil di sini secara langsung.</p>
+          </div>
+
+          <div id="live-body" hidden>
+            <div class="row-between">
+              <h2 id="live-title">Mengirim ping</h2>
+              <div class="actions">
+                <button id="cancel" class="btn ghost" type="button">Batalkan</button>
+                <button id="csv" class="btn ghost" type="button" hidden>Unduh CSV</button>
+              </div>
+            </div>
+
+            <div class="stats">
+              <div><b id="n-ok">0</b><span>Berhasil</span></div>
+              <div><b id="n-fail">0</b><span>Gagal</span></div>
+              <div><b id="n-total">0</b><span>Total</span></div>
+            </div>
+            <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progres ping"><i id="bar-fill"></i></div>
+
+            <div id="grid" class="grid" aria-hidden="true"></div>
+            <p class="legend muted small"><span class="dot ok"></span> berhasil <span class="dot fail"></span> gagal <span class="dot"></span> menunggu</p>
+
+            <div class="filters" role="group" aria-label="Filter hasil">
+              <button type="button" data-f="all" aria-pressed="true">Semua</button>
+              <button type="button" data-f="success" aria-pressed="false">Berhasil</button>
+              <button type="button" data-f="failed" aria-pressed="false">Gagal</button>
+            </div>
+            <div id="groups" data-f="all"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Riwayat -->
+    <section id="view-history" hidden>
+      <div class="card">
+        <h1>Riwayat</h1>
+        <div id="history-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
