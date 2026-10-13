@@ -1,0 +1,11 @@
+services:
+  shadow-pingmax:
+    build: .
+    container_name: shadow-pingmax
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+      - ./services.json:/app/services.json:ro
